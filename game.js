@@ -1,22 +1,34 @@
-word = "DREAM"
+word = "DREAD"
 input = ""
 tries = 0
 greens = ""
 td = ""
 tr = ""
+win = false;
+console.log(wordList)
+
+randomWord()
+
+function getRandomInt(max) {
+    return Math.floor(Math.random() * max);
+  }
+  
+function randomWord() {
+    word = wordList[getRandomInt(wordList.length)].toUpperCase()
+}
 
 function onKeyDown(event) {
     event.preventDefault();
 }
 function deleteBoxes() {
     tr = document.getElementsByTagName('tr')[tries]
-    td = tr.getElementsByTagName('div')[input.length]
+    td = tr.getElementsByTagName('td')[input.length]
     td.innerHTML = ""
     //console.log('here')
 }
 function writeBoxes() {
     tr = document.getElementsByTagName('tr')[tries]
-    td = tr.getElementsByTagName('div')[input.length-1]
+    td = tr.getElementsByTagName('td')[input.length-1]
     td.innerHTML = input[input.length-1]
 }
 
@@ -24,10 +36,14 @@ function nextTry() {
     if (input.length != 5) {
        return;
     }
+    if (!dictionaryChecker()){
+        return;
+    }
     wordChecker()
 
     if (input ==  word) {
         //win
+        win = true;
         tries = 7;
         return;
     }
@@ -37,7 +53,10 @@ function nextTry() {
     greens = ""
 }
 
-//word.indexOf(input[i])
+function dictionaryChecker(){
+    console.log(wordList.includes(input.toLowerCase()));
+    return wordList.includes(input.toLowerCase());
+}
 
 function wordChecker() {
     for (let i = 0; i < 5; i++) {

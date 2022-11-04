@@ -9,6 +9,7 @@
 .wordTable {
     width: 30%;
     height: 70%;
+    border-spacing: 7px;
 }
 
 .smallText {
@@ -16,8 +17,8 @@
     height: 57px;
     font-size: 85px;
     position: relative;
-    top: -16px;
-    right: -19px;
+    top: 0px;
+    right: 0px;
 }
 
 .wordTable td {
@@ -26,9 +27,6 @@
     width: 20%;
     height: 10%;
     text-align: center;
-    font-size: 50px;
-    font-weight: bold;
-    font-family: Arial;
 }
 
 .wordTable tr {
@@ -40,6 +38,9 @@
     color: black;
     border: 3px solid;
     border-color: rgb(200,200,200);
+    font-size: 49px;
+    font-weight: bold;
+    font-family: Arial;
 }
 
 .greenBox {
@@ -54,11 +55,9 @@
     background-color: grey;
 }
 
-.greenBox .yellowBox .greyBox {
-    border: 3px solid;
-    border-color: white;
+.greenBox, .yellowBox, .greyBox {
     text-align: center;
-    font-size: 55px;
+    font-size: 54px;
     font-weight: bold;
     font-family: Arial;
     color: white;
