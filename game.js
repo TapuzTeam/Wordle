@@ -1,13 +1,15 @@
-word = "DREAD"
+word = ""
 input = ""
 tries = 0
 greens = ""
 td = ""
 tr = ""
 win = false;
+pressed = false;
 console.log(wordList)
 
 randomWord()
+console.log(word)
 
 function getRandomInt(max) {
     return Math.floor(Math.random() * max);
@@ -24,12 +26,15 @@ function deleteBoxes() {
     tr = document.getElementsByTagName('tr')[tries]
     td = tr.getElementsByTagName('td')[input.length]
     td.innerHTML = ""
-    //console.log('here')
+    td.style = ""
 }
 function writeBoxes() {
     tr = document.getElementsByTagName('tr')[tries]
     td = tr.getElementsByTagName('td')[input.length-1]
-    td.innerHTML = input[input.length-1]
+    if(tr.getElementsByTagName('td')[4].innerHTML == '') {
+        td.innerHTML = input[input.length-1]
+        scaleBoxes()
+    }
 }
 
 function nextTry() {
@@ -37,6 +42,7 @@ function nextTry() {
        return;
     }
     if (!dictionaryChecker()){
+        moveTableRow();
         return;
     }
     wordChecker()
@@ -54,8 +60,8 @@ function nextTry() {
 }
 
 function dictionaryChecker(){
-    console.log(wordList.includes(input.toLowerCase()));
-    return wordList.includes(input.toLowerCase());
+    //console.log(wordList.includes(input.toLowerCase()));
+    return dictionary.includes(input.toLowerCase());
 }
 
 function wordChecker() {
@@ -66,22 +72,20 @@ function wordChecker() {
                 //green
                 boxChanger(i, 'green')
                 greens += input[i]
-            }
-            else {
+            } else if (!greens.includes(input[i])) {
                 //yellow
-                if (!greens.includes(input[i]))
                     boxChanger(i, 'yellow')
+            } else {
+                boxChanger(i, 'grey')
             }
-        }
-        else
+        } else {
             //grey
             boxChanger(i, 'grey')
-      }
-
+        }
+    }
     for (let i = 0; i < word.length; i++) {
         letter = word[i]
       }
-      
 }
 
 function boxChanger(num, color) {
@@ -90,12 +94,21 @@ function boxChanger(num, color) {
     td.className = color += 'Box'
 }
 
-
+window.addEventListener("keyup", function() {
+    pressed = false;
+})
+var prevKey = null;
 window.addEventListener("keydown", function(event) {
     if (event.defaultPrevented) {
         return;
     }
-    
+
+    //prevents key holddown
+    if (pressed && event.key == prevKey && event.key != 'Backspace' && event.key != 'Delete'){
+        return;
+    }
+    pressed = true;
+    prevKey = event.key
 
     //handles user input
     switch (event.key) {
@@ -132,8 +145,8 @@ window.addEventListener("keydown", function(event) {
     while (input.length > 5) {
         input = input.slice(0,-1);
     }
-    console.log(input)
-    if (input.length > 0)
+
+    if (event.key.toLowerCase() != event.key.toUpperCase() && event.key.length == 1){
         writeBoxes()
-    
+    }
 })

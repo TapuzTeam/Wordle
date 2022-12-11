@@ -6,6 +6,13 @@
     top: 50px;
 }
 
+#title:hover {
+    animation-iteration-count: infinite;
+    animation-name: shake;
+    animation-duration: 0.5s;
+    animation-direction: reverse;
+}
+
 .wordTable {
     width: 30%;
     height: 70%;
@@ -30,7 +37,9 @@
 }
 
 .wordTable tr {
-
+    animation-name: error;
+    animation-duration: 0.3s;
+    animation-direction: reverse;
 }
 
 .emptyBox {
@@ -41,6 +50,7 @@
     font-size: 49px;
     font-weight: bold;
     font-family: Arial;
+    transition: transform .15s;
 }
 
 .greenBox {
